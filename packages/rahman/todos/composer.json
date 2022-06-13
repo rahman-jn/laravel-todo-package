@@ -1,0 +1,26 @@
+{
+    "name": "rahman/todos",
+    "description": "This package manges ToDo tasks.",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Rahman\\Todos\\": "src/",
+            "Rahman\\Todos\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rahman Jafarinejad",
+            "email": "rahman.j88@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Rahman\\Todos\\TodoServiceProvider"
+            ]
+        }
+    }
+}
