@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Rahman\Todos\Models\Label;
 use Rahman\Todos\Resources\LabelResource;
 use Rahman\Todos\Models\TaskLabel;
+use Rahman\Todos\Services\LabelService;
 use Rahman\Todos\Resources\LabelCollection;
 use DB;
 
@@ -19,21 +20,24 @@ use DB;
  */
 class LabelController extends Controller
 {
+
+    //LabelService param for injecting dependency
+    protected $labelService;
+
     /**
-     * Display a listing of the label collection belongs to logged-in user.
-     *
-     * @return \Illuminate\Http\Response
+     * Constructor for injecting tht dependency
      */
+    public function __construct(LabelService $labelService){
+        $this->labelService = $labelService;
+    }
+
     public function index()
     {
-        $result = DB::table('labels')
-        ->selectRaw("count(if(tasks.user_id = ".Auth::id().",tasks.id, null)) as user_label_tasks ,labels.title,labels.id")
-         ->leftjoin('tasklabels as tl', 'tl.label_id', '=', 'labels.id')
-         ->leftjoin('tasks', 'tl.task_id', '=', 'tasks.id')
-         ->groupBy('labels.id','labels.title')
-        ->get();
 
-        return json_decode(json_encode($result), true);
+
+        $labels = $this->labelService->labelsList();
+
+        return $labels;
 
     }
 

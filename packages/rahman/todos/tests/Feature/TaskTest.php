@@ -12,7 +12,7 @@ use Rahman\Todos\Models\Task;
 
 class TaskTest extends TestCase
 {
-    //use RefreshDatabase;
+    use RefreshDatabase;
     use WithFaker;
 
     /** 
@@ -34,7 +34,7 @@ class TaskTest extends TestCase
       *
       *@return Rahman\Todos\Models\Task
       */
-      public function store_simple_task_by_user(){
+      public function test_store_simple_task_by_user(){
         //Login user to system
         $user = $this->loginUser();
         //Creating task is reated for several times, so moved in a function
@@ -50,7 +50,7 @@ class TaskTest extends TestCase
       * Edit the task
       *@return void
       */
-      public function edit_task(){
+      public function test_edit_task(){
         //Create a User  
         //Login user to system
         $user = $this->loginUser();
@@ -79,7 +79,7 @@ class TaskTest extends TestCase
       * Edit the task
       *@return void
       */
-      public function edit_task_only_for_own_tasks(){
+      public function test_edit_task_only_for_own_tasks(){
         //Create a User  
         $user = $this->loginUser();
         //Create a task
@@ -182,12 +182,9 @@ class TaskTest extends TestCase
             'title' => 'taskNo1',
             'description' => 'Description of task NO1'
         ]);
-        //$task = json_decode(json_encode($task), true);
         
-        //die(print_r((array_keys($task))));
         $response = $this->actingAs($user)->get('/tasks/'.$task->id);
         $response = json_decode(json_encode($response), true);
-        //die($response['baseResponse']['original']['title']."======". "taskNo1");
         $this->assertEquals($response['baseResponse']['original']['title'], "taskNo1");
      }
 
@@ -226,7 +223,7 @@ class TaskTest extends TestCase
         $this->assertEquals(count($response['baseResponse']['original']), 0);
      }
 
-     public function send_email(){
+     public function test_send_email(){
         $mock = \Mockery::mock($this->app['mailer']->getSwiftMailer());
         $this->app['mailer']->setSwiftMailer($mock);
         $mock

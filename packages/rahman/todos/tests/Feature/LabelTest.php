@@ -27,7 +27,7 @@ class LabelTest extends TestCase
     *@return void
     */
 
-    public function unsuthenticated_users_cant_access_to_store_method()
+    public function test_unsuthenticated_users_cant_access_to_store_method()
     {
         //Get error when call the method befor login
         $response = $this->post('/labels');
@@ -42,7 +42,7 @@ class LabelTest extends TestCase
      * @return void
      */
 
-     public function store_simple_label(){
+     public function test_store_simple_label(){
         //Login user to system
         $user = $this->loginUser();
         factory(Label::class)->create([
@@ -57,7 +57,7 @@ class LabelTest extends TestCase
       *
       *@return Rahman\Todos\Models\Label
       */
-     public function store_simple_label_by_user(){
+     public function test_store_simple_label_by_user(){
         //Login user to system
         $user = $this->loginUser();
 
@@ -76,7 +76,7 @@ class LabelTest extends TestCase
       *
       *@return void
       */
-      public function duplicated_label_doesnt_store(){
+      public function test_duplicated_label_doesnt_store(){
         //Login user to system
         $user = $this->loginUser();
         //First create a label
@@ -98,7 +98,7 @@ class LabelTest extends TestCase
        * 
        * @return void
        */
-      public function too_short_title_forbiddened(){
+      public function test_too_short_title_forbiddened(){
         //Login user to system
         $user = $this->loginUser();
         //Minimum allowed length is 3

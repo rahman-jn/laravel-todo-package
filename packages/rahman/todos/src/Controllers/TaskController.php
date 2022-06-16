@@ -84,7 +84,10 @@ class TaskController extends Controller
 
             }
             
-            return json_decode(json_encode(new TaskResource($task)), true);
+            return response()->json($task, 200,
+            ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+           JSON_UNESCAPED_UNICODE);
+
         }
         catch(\Illuminate\Database\QueryException $e){
                 throw($e);
@@ -113,7 +116,9 @@ class TaskController extends Controller
             'id' => $id
         ])->first();
 
-        return  json_decode(json_encode(new TaskResource($task)), true);
+        return response()->json($task, 200,
+         ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+        JSON_UNESCAPED_UNICODE);
     }
 
     /**
