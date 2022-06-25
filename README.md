@@ -1,4 +1,4 @@
-# laravel-todo-package #
+# laravel todo package #
 
 A laravel package for managing Todo list.
 This package implements varity of Laravel features like:
